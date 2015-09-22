@@ -56,7 +56,7 @@ static uint32_t startTime = 0;
 static uint16_t lastSpeed = 0;
 static uint32_t lastSpeedTime = 0;
 static int gpsSpeed = -1;
-static uint16_t gpsDate = 0;
+static uint32_t gpsDate = 0;
 
 static const byte PROGMEM pidTier1[]= {PID_RPM, PID_SPEED, PID_ENGINE_LOAD, PID_THROTTLE};
 static const byte PROGMEM pidTier2[] = {PID_INTAKE_MAP, PID_MAF_FLOW, PID_TIMING_ADVANCE};
@@ -378,7 +378,7 @@ void processGPS()
     gps.get_datetime(&date, &time, 0);
     if (date != gpsDate) {
         // log date only if it's changed
-        logger.logData(PID_GPS_DATE, (int32_t)time);
+        logger.logData(PID_GPS_DATE, (int32_t)date);
         gpsDate = date;
     }
     logger.logData(PID_GPS_TIME, (int32_t)time);
